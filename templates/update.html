@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>FlaskApp</title>
+</head>
+
+<body>
+    <div class="container container-fluid my-5">
+        <div>
+            <a href="/" class="link-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                </svg>
+            </a>
+        </div>
+        <h1 class="text-center txt-color">Ready to update this article?</h1>
+        <div class="container offset-2 col-8">
+            <h4 class="text-center mt-4 mb-5 txt-color main-heading">
+                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in form. Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit.
+            </h4>
+        </div>
+        <div class="col-sm-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4 p-5 border border-custom border-1">
+            <form method="POST">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="_id" id="_id" placeholder="_id" value="{{ article._id }}" readonly></input>
+                    <label for="_id">ID</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="name" value="{{ article.name }}"></input>
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="date" id="date" placeholder="date" value="{{ article.date }}"></input>
+                    <label for="date">Date</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="text" id="text" placeholder="text" value="{{ article.text }}"></input>
+                    <label for="text">Text</label>
+                </div>
+                <div class="d-grid gap-2 mb-3">
+                    <button type="submit" class="btn btn-lg btn-secondary">Change</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>

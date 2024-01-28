@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script>
+        const articleTextElements = document.querySelectorAll(".article-text");
+        articleTextElements.forEach((element) => {
+          const text = element.textContent;
+          const limitedText = text.slice(0, 500) + "...";
+          element.textContent = limitedText;
+        });
+      </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="https://travelinspires.org/wp-content/uploads/2018/09/cropped-favicon.png">
+
+    <title>Flask APP!</title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- button na vytvorenie articlu -->
+    <div class="container container-fluid my-5">
+        <div class="container container-fluid">
+            <form id="form1" method="GET" action="{{ url_for('create') }}">
+                <a href="javascript:{}" onclick="document.getElementById('form1').submit(); return false;" class="link-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </a>
+            </form>
+        </div>
+        <h1 class="text-center txt-color">Articlepedia</h1>
+        <div class="container col-offset-2 col-8">
+            <h5 class="text-center mt-4 mb-5 txt-color main-heading">
+                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in form. Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit.
+            </h5>
+        </div>
+        <div>
+
+        </div>
+        <div class="container container-fluid">
+            <!-- ukáž articles -->
+            <div class="row">
+                {% for article in articles %}
+                <div class="col-sm-12 col-md-6 col-xl-4 txt-color">
+                    <div class="card mb-3 rounded-3">
+                        <div class="d-flex justify-content-center align-items-center img-div">
+                            <img class="img-content" src="{{ article.image }}" alt="Card image cap">
+                        </div>
+                        <div class="card-body txt-color p-4">
+                            <p class="card-date fw-300 mt-2 mb-1">{{ article.date }}</p>
+                            <h5 class="card-title mb-3">{{ article.name }}</h5>
+                            <p class="card-text fw-300">{{ article.text }}</p>
+                            <p class="card-text fw-300">{{ article.author_name }}</p>
+                            <div class="row">
+                                <div class="col-8"></div>
+                                <div class="col-4 pe-0">
+                                    <div class="d-flex flex-row-reverse">
+                                        <!-- button na otvorenie articlu -->
+                                        <a href="{{ url_for('show_article', _id=(article['_id'])) }}" class="txt-color mx-2">
+
+                                            <svg fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"></path>
+                                                </svg>
+                                        </a>
+                                        <!-- button na delete articlu -->
+                                        <form id="my_form" method="POST">
+                                            <a href="{{ url_for('delete', _id=article['_id']) }}" onclick="document.getElementById('my_form').submit(_id); return false;" class="txt-color mx-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"></path>
+                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"></path>
+                                                </svg>
+                                            </a>
+                                            
+                                        </form>
+                                        <!-- button na update articlu -->
+                                        <a href="{{ url_for('update', _id=article['_id']) }}" class="txt-color mx-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                                </svg>
+                                        </a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- kód pre stránkovanie -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if page > 1 %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page - 1 }}&limit={{ limit }}">Predchádzajúca</a></li>
+                    {% endif %}
+                    {% for p in range(1, total_pages + 1) %}
+                        {% if p == page %}
+                            <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ p }}&limit={{ limit }}">{{ p }}</a></li>
+                        {% endif %}
+                        {% if p != total_pages %}
+                            <li class="page-item separator"></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page < total_pages %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page + 1 }}&limit={{ limit }}">Ďalšia</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>

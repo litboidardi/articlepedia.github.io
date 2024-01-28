@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/view.css') }}">
+    <title>FlaskApp</title>
+    
+</head>
+
+<body>
+    <div class="container my-5">
+        <div>
+            <a href="/" class="link-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                </svg>
+            </a>
+        </div>
+        <h1 class="text-center txt-color">{{ article.name }}</h1>
+        <div class="container">
+            <h4 class="text-center mt-4 mb-5 txt-color main-heading">{{ article.text }}</h4>
+        </div>
+        <div class="container author-text">
+            <p>author: {{ article.author_name }}</p>
+        </div>
+        <div class="container">
+            <h3 class="txt-color">Comments:</h3>
+            {% for comment in article.comments %}
+                <div class="card mb-3 comment-card">
+                    <div class="card-body">
+                        <p class="card-text comment-text">{{ comment.comment }}</p>
+                        <p class="card-text comment-date"><small>{{comment.author_name}} &nbsp &nbsp {{ comment.date }}</small></p>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>
